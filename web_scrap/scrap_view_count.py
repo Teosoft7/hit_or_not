@@ -19,7 +19,7 @@ def get_view_count(browser, url):
     now = datetime.now()
 
     browser.execute_script("window.scrollTo(0, window.scrollY + 640)")
-    time.sleep(4)
+    time.sleep(3)
 
     # view-count
     sel = 'span.view-count'
@@ -47,7 +47,7 @@ def get_view_count(browser, url):
         'timestamp': now }
 
 # Get list of videos to collect view counts
-coll = db['videos']
+coll = db['video_detail']
 cur = coll.find({})
 videos = [video for video in cur]
 random.shuffle(videos)
@@ -57,29 +57,37 @@ options = Options()
 options.headless = True
 
 # setup virtual display
-with Display(visible=1, size=(1280, 800)) as display:
+with Display(visible=1, size=(1920, 1080)) as display:
     # initialize browser
     browser = webdriver.Firefox(options=options)
     browser.maximize_window()
 
-    count_coll = db['view_count']
-
     # loop through forever
     while True:
+        random.shuffle(videos)
         for i, video in enumerate(videos):
             url = video['url']
-            count = get_view_count(browser, url)
-            print(i, ': ', video['title'], ' - ', url)
-            print(count)
+            try:
+                title = video['title']
+                video_id = url.split('=')[-1]
 
-            count_coll.insert_one({
-                'title': video['title'],
-                'view_count': count['view_count'],
-                'comment_count': count['comment_count'],
-                'like_count': count['like_count'],
-                'timestamp': count['timestamp']
-            })
+                print(f'{datetime.now()} {i}: {title} - {url}')
+                count = get_view_count(browser, url)
+
+                count_coll = db['view_count']
+                count_coll.insert_one({
+                    'video_id': video_id,
+                    'view_count': count['view_count'],
+                    'comment_count': count['comment_count'],
+                    'like_count': count['like_count'],
+                    'timestamp': count['timestamp']
+                })
+            except:
+                print(f'error in {i}, {video["url"]}')
+
         # Idle 1+ mins
+        print('Idling')
         time.sleep(60 + random.randint(0, 60))
+        
 
 browser.close()
