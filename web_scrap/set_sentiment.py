@@ -13,7 +13,7 @@ comments = [comment for comment in cur]
 
 for i, comment in enumerate(comments):
     sentiment = TextBlob(comment['comment'], analyzer=NaiveBayesAnalyzer()).sentiment
-    db.Doc.update_one({"_id": comment["_id"]}, 
+    coll.update_one({"_id": comment["_id"]}, 
         {"$set": {"sentiment": sentiment.p_pos}})
 
     print(datetime.now(), i, comment['comment'][:10], sentiment.p_pos)
