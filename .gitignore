@@ -105,3 +105,6 @@ venv.bak/
 
 # for mac
 .DS_Store
+
+# GeckoDriver Log
+geckodriver.log
