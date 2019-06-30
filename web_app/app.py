@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, redirect, url_for
 
 import pickle
 
@@ -11,6 +11,16 @@ app = Flask(__name__, static_url_path="")
 def index():
     """Return the main page."""
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    """Return the about page."""
+    return render_template('about.html')
+
+@app.route('/detail')
+def detail():
+    """Return video detail page."""
+    return render_template('detail.html')
 
 # @app.route('/predict', methods=['GET', 'POST'])
 # def predict():

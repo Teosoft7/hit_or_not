@@ -42,6 +42,7 @@
               document["result"].html = response.text
           else:
               warnings.warn(response.text)
+      
 
       def get_prediction(ev):
           """Get the predicted probability."""
@@ -60,8 +61,8 @@
           <h1 class="jumbotron-heading">Hit or Not?</h1>
           <p class="lead text-muted">This is a simple app to show the prediction of number of view count for Youtube Video</p>
           <p>
-            <a href="#" class="btn btn-primary my-2">Predict with Link</a>
-            <a href="#" class="btn btn-secondary my-2">More Info</a>
+            <a href="{{ url_for('detail') }}" class="btn btn-primary my-2">Predict with Link</a>
+            <a href="{{ url_for('about') }}" class="btn btn-secondary my-2">More Info</a>
           </p>
         </div>
     </section>
@@ -73,46 +74,49 @@
         <div class="row">
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                <div class="card-body">
+                  <img src="https://img.youtube.com/vi/Nm7qzNNtnhI/hqdefault.jpg" class="card-img-top" alt="...">
+                  <div class="card-header">Title</div>
+                  <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View Prediction</button>
+                        <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">detail</a>
                     </div>
-                    <small class="text-muted">9 views</small>
+                    <small class="text-muted">123,456,789 views</small>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                  <div class="card-body">
+                    <img src="https://img.youtube.com/vi/Nm7qzNNtnhI/hqdefault.jpg" class="card-img-top" alt="...">
+                    <div class="card-header">Title</div>
+                    <div class="card-body">
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View Prediction</button>
+                          <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">detail</a>
                       </div>
-                      <small class="text-muted">9 views</small>
+                      <small class="text-muted">123,456,789 views</small>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                  <div class="card mb-4 shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="https://img.youtube.com/vi/Nm7qzNNtnhI/hqdefault.jpg" class="card-img-top" alt="...">
+                    <div class="card-header">Title</div>
                     <div class="card-body">
-                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">View Prediction</button>
-                        </div>
-                        <small class="text-muted">9 views</small>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">detail</a>
                       </div>
+                      <small class="text-muted">123,456,789 views</small>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
