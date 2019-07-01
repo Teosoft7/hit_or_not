@@ -1,7 +1,6 @@
 <!doctype html>
-<html lang='en'>
+<html>
   <meta charset="UTF-8">
-
   <head>
     <title>Hit or Not</title>
     <script type="text/javascript" src="brython.js"></script>
@@ -61,7 +60,7 @@
           <h1 class="jumbotron-heading">Hit or Not?</h1>
           <p class="lead text-muted">This is a simple app to show the prediction of number of view count for Youtube Video</p>
           <p>
-            <a href="{{ url_for('detail') }}" class="btn btn-primary my-2">Predict with Link</a>
+            <a href="{{ url_for('detail') }}" class="btn btn-danger my-2">New Video</a>
             <a href="{{ url_for('about') }}" class="btn btn-secondary my-2">More Info</a>
           </p>
         </div>
@@ -70,12 +69,12 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-
         <div class="row">
+          {% for i in range(0, 3) %}
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
-                  <img src="https://img.youtube.com/vi/Nm7qzNNtnhI/hqdefault.jpg" class="card-img-top" alt="...">
-                  <div class="card-header">Title</div>
+                  <img src="{{ "https://img.youtube.com/vi/" + last3_video[i]['video_id'] + "/hqdefault.jpg" }}"  class="card-img-top" alt="...">
+                  <div class="card-header">{{ last3_video[i]['title'] }}</div>
                   <div class="card-body">
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                   <div class="d-flex justify-content-between align-items-center">
@@ -87,37 +86,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src="https://img.youtube.com/vi/Nm7qzNNtnhI/hqdefault.jpg" class="card-img-top" alt="...">
-                    <div class="card-header">Title</div>
-                    <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                          <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">detail</a>
-                      </div>
-                      <small class="text-muted">123,456,789 views</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src="https://img.youtube.com/vi/Nm7qzNNtnhI/hqdefault.jpg" class="card-img-top" alt="...">
-                    <div class="card-header">Title</div>
-                    <div class="card-body">
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">detail</a>
-                      </div>
-                      <small class="text-muted">123,456,789 views</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {% endfor %}
           </div>
         </div>
       </div>
