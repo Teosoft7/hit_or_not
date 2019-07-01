@@ -1,26 +1,25 @@
+import pandas as pd
 from flask import Flask, request, render_template, jsonify, redirect, url_for
+from functions import get_last4_videos, get_view_data, create_chart
+from bokeh.embed import components
 from pymongo import MongoClient
 
-import pickle
+from collections import ChainMap
 
+# import pickle
 # with open('spam_model.pkl', 'rb') as f:
 #     model = pickle.load(f)
 
-connection = MongoClient(port=47017)
+connection = MongoClient()
 db = connection['youtube_scrap']
 
 app = Flask(__name__, static_url_path="")
 
-def get_last3_videos():
-    video_coll = db['video_detail']
-    cursor = video_coll.find({}).limit(3)
-    return [record for record in cursor]
-
 @app.route('/')
 def index():
     """Return the main page."""
-    last3_video = get_last3_videos()
-    return render_template('index.html', last3_video=last3_video)
+    last_video = get_last4_videos(db)
+    return render_template('index.html', last_video=last_video)
 
 @app.route('/about')
 def about():
@@ -28,9 +27,17 @@ def about():
     return render_template('about.html')
 
 @app.route('/detail')
-def detail():
+def detail(video_id=None):
     """Return video detail page."""
-    return render_template('detail.html')
+    data = get_view_data(db, 'nM0xDI5R50E')
+    hover=None
+    
+    plot = create_chart(data, "View Counts", hover)
+    script, div = components(plot)
+
+    return render_template('detail.html', counts=len(data), 
+                            data=data, video=None, 
+                            the_script=script, the_div=div)
 
 # @app.route('/predict', methods=['GET', 'POST'])
 # def predict():

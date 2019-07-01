@@ -17,9 +17,13 @@
           -ms-user-select: none;
           user-select: none;
         }
-  
 
-      </style>
+        @media (min-width: 575.98px) {                 
+          .bd-placeholder-img-md {
+                font-size: 3.5rem;      
+            } 
+          }
+     </style>
 
     <!-- Custom styles for this template -->
     <!-- <link href="jumbotron.css" rel="stylesheet">
@@ -38,7 +42,6 @@
           else:
               warnings.warn(response.text)
       
-
       def get_prediction(ev):
           """Get the predicted probability."""
           req = ajax.ajax()
@@ -51,33 +54,33 @@
       document["predict_button"].bind("click", get_prediction)
     </script>
 
+    <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Hit or Not?</h1>
           <p class="lead text-muted">This is a simple app to show the prediction of number of view count for Youtube Video</p>
           <p>
-            <a href="{{ url_for('detail') }}" class="btn btn-danger my-2">New Video</a>
+            <a href="{{ url_for('index') }}" class="btn btn-danger my-2">Shuffle</a>
             <a href="{{ url_for('about') }}" class="btn btn-secondary my-2">More Info</a>
           </p>
         </div>
     </section>
-
-
-    <div class="album py-5 bg-light">
+    <div class="album bg-light">
         <div class="container">
         <div class="row">
-          {% for i in range(0, 3) %}
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                  <img src="{{ "https://img.youtube.com/vi/" + last3_video[i]['video_id'] + "/hqdefault.jpg" }}"  class="card-img-top" alt="...">
-                  <div class="card-header">{{ last3_video[i]['title'] }}</div>
+          {% for i in range(0, 4) %}
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                  <img src="{{ "https://img.youtube.com/vi/" + last_video[i]['video_id'] + "/hqdefault.jpg" }}"  
+                       class="card-img-top" alt="..." width="100%">
+                  <div class="card-header">{{ last_video[i]['published'] }}</div>
                   <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <h6 class="card-title">{{ last_video[i]['title'] }}</h6>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">detail</a>
+                        <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">predict</a>
                     </div>
-                    <small class="text-muted">123,456,789 views</small>
+                    <small class="text-muted">{{ last_video[i]['view_count'] }} views</small>
                   </div>
                 </div>
               </div>
@@ -89,7 +92,8 @@
     <!-- <textarea id="user_input"></textarea>
     <button id="predict_button">Predict!</button>
     <div id="result"></div> -->
-
+    </main>
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
