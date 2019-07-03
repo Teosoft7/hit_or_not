@@ -5,6 +5,7 @@ import time
 from matplotlib import pyplot as plt
 from matplotlib import dates as mdates
 from datetime import datetime
+from fbprophet import Prophet
 
 from pymongo import MongoClient, DESCENDING
 # from bokeh.models import (HoverTool, FactorRange, Plot, LinearAxis, Grid,
@@ -56,6 +57,22 @@ def get_view_data(db, video_id):
     cursor = view_count_coll.find(filter).sort('timestamp', DESCENDING)
 
     return [record for record in cursor]
+
+def do_predict(data, periods=3):
+    """Return predicted view_count for period days """
+    # initialize Prophet model
+    m = Prophet()
+
+    # prepare dataframe for Prophet
+    est_df = data[['timestamp', 'view_count']]
+    est_df.columns = ['ds', 'y']
+
+    # fit to model
+    m.fit(est_df)
+    future = m.make_future_dataframe(periods=periods)
+    forecast = m.predict(future)
+    
+    return forecast
 
 def create_chart(data, title, hover_tool=None,
                  width=1024, height=480):

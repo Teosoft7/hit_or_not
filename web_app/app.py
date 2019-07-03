@@ -7,11 +7,6 @@ import pandas as pd
 from flask import Flask, request, render_template, jsonify, redirect, url_for
 from bokeh.embed import components
 from pymongo import MongoClient
-from collections import ChainMap
-
-# import pickle
-# with open('spam_model.pkl', 'rb') as f:
-#     model = pickle.load(f)
 
 connection = MongoClient(port=47017)
 db = connection['youtube_scrap']
@@ -31,7 +26,7 @@ def about():
     """Return the about page."""
     return render_template('about.html')
 
-@app.route('/detail', methods=['GET', 'POST'])
+@app.route('/detail', methods=['GET'])
 def detail():
     """Return video detail page."""    
     video_id = request.args.get('video_id')
@@ -43,11 +38,3 @@ def detail():
     return render_template('detail.html', counts=len(data), 
                             data=data, video=None, 
                             the_script=script, the_div=div)
-
-# @app.route('/predict', methods=['GET', 'POST'])
-# def predict():
-#     """Return a random prediction."""
-#     data = request.json
-#     prediction = model.predict_proba([data['user_input']])
-#     return jsonify({'probability': prediction[0][1]})
-
