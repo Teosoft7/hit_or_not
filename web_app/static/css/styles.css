@@ -1,5 +1,21 @@
 @import "https://fonts.googleapis.com/icon?family=Material+Icons"; 
 
+p {
+    font-family: 'Russo One', sans-serif;
+}
+
+h1 {
+    font-family: 'Russo One', sans-serif;
+}
+
+h4 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+td {
+    font-family: 'Open Sans', sans-serif;
+}
+
 .btn-primary {
     background-color: red;
 }

@@ -5,9 +5,9 @@
         <script type="text/javascript" src="brython.js"></script>
         <script type="text/javascript" src="brython_stdlib.js"></script>
         <link rel="stylesheet" href="css/styles.css">        
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
-        <link href="css/dashboard.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.2.0.min.css" type="text/css" />
         <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.2.0.min.css" type="text/css" />
         <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-tables-1.2.0.min.css" type="text/css" />
@@ -19,71 +19,45 @@
         <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-api-1.2.0.min.js"></script>
                     
         <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-        
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-                }
-            }
         </style>
     </head>
     
     <body>
-      <!-- Image and text -->
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand mb-1 h1" href="{{ url_for('index') }}">
-          HOME
-        </a>
-      </nav>
     <div class="container">
         <div class="row">
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <span data-feather="calendar"></span>
-                    This week
-                    </button>
-                </div>
-                </div>
-                <div>
-                    {{ the_div|safe }}
-                    {{ the_script|safe }}    
-                </div>
+          <main role="main" class="col-md-3 ml-sm-auto col-lg-12">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <a class="mb-1 h1" href="{{ url_for('index') }}">
+                <i class="material-icons">home</i> </a>
+              <h1 class="h2">Predictions</h1>
+              <div class="btn-toolbar mb-2 mb-md-0"></div>
+            </div>
+
+            <div class='col-md-9'>
+                {{ the_div|safe }}
+                {{ the_script|safe }}    
+            </div>
             
-                <h3>Changes by Time</h3>
+                <h4>Changes by Time</h4>
                 <div class="table-responsive">
                   <table class="table table-striped table-sm">
                     <thead>
                       <tr>
-                        <th>#</th>
-                        <th>Time</th>
-                        <th>Likes</th>
-                        <th>Comments</th>
-                        <th>Views</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Time</th>
+                        <th class="text-center">Likes</th>
+                        <th class="text-center">Comments</th>
+                        <th class="text-center">Views</th>
                       </tr>
                     </thead>
                     {% for i in range(0, counts) %}
                     <tbody>
                       <tr>
-                        <td>{{ i }}</td>
-                        <td>{{ data[i]['timestamp'].strftime('%Y-%m-%d %H:%M') }}</td>
-                        <td>{{ "{:,}".format(data[i]['like_count']) }}</td>
-                        <td>{{ "{:,}".format(data[i]['comment_count']) }}</td>
-                        <td>{{ "{:,}".format(data[i]['view_count']) }}</td>
+                        <td class="text-center">{{ i + 1 }}</td>
+                        <td class="text-center">{{ data[i]['timestamp'].strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td class="text-center">{{ "{:,}".format(data[i]['like_count']) }}</td>
+                        <td class="text-center">{{ "{:,}".format(data[i]['comment_count']) }}</td>
+                        <td class="text-center">{{ "{:,}".format(data[i]['view_count']) }}</td>
                       </tr>
                     </tbody>
                     {% endfor %}
@@ -92,6 +66,17 @@
         </main>
         </div>
     </div>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
+      </div>
+    </footer>
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -5,6 +5,7 @@
     <title>Hit or Not</title>
     <script type="text/javascript" src="brython.js"></script>
     <script type="text/javascript" src="brython_stdlib.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -58,18 +59,21 @@
     <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">Hit or Not?</h1>
-          <p class="lead text-muted">This is a simple app to show the prediction of number of view count for Youtube Video</p>
+          <p class="lead text-muted">This is a simple app to show the prediction of number of view count for Youtube Video <br>
+           It is collecting change of view count for every hour and estimating the views for after 3 days.
+          </p>
+
           <p>
-            <a href="{{ url_for('index') }}" class="btn btn-danger my-2">Shuffle</a>
-            <a href="{{ url_for('about') }}" class="btn btn-secondary my-2">More Info</a>
+            <a href="{{ url_for('index') }}" class="btn btn-danger my-2">More video</a>
+            <a href="{{ url_for('about') }}" class="btn btn-secondary my-2">About</a>
           </p>
         </div>
     </section>
     <div class="album bg-light">
         <div class="container">
         <div class="row">
-          {% for i in range(0, 4) %}
-            <div class="col-md-6">
+          {% for i in range(0, counts) %}
+            <div class="col-md-4">
               <div class="card shadow-sm">
                   <img src="{{ "https://img.youtube.com/vi/" + last_video[i]['video_id'] + "/hqdefault.jpg" }}"  
                        class="card-img-top" alt="..." width="100%">
@@ -78,7 +82,7 @@
                     <h6 class="card-title">{{ last_video[i]['title'] }}</h6>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{{ url_for('detail') }}"  class="btn btn-sm btn-outline-secondary">predict</a>
+                        <a href="{{ url_for('detail', video_id=last_video[i]['video_id']) }}"  class="btn btn-sm btn-outline-secondary">predict</a>
                     </div>
                     <small class="text-muted">{{ last_video[i]['view_count'] }} views</small>
                   </div>
