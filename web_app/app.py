@@ -8,7 +8,7 @@ from flask import Flask, request, render_template, jsonify, redirect, url_for
 from bokeh.embed import components
 from pymongo import MongoClient
 
-connection = MongoClient(port=47017)
+connection = MongoClient()
 db = connection['youtube_scrap']
 
 app = Flask(__name__, static_url_path="")

@@ -58,15 +58,10 @@
     <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Hit or Not?</h1>
-          <p class="lead text-muted">This is a simple app to show the prediction of number of view count for Youtube Video <br>
-           It is collecting change of view count for every hour and estimating the views for after 3 days.
-          </p>
-
-          <p>
-            <a href="{{ url_for('index') }}" class="btn btn-danger my-2">More video</a>
-            <a href="{{ url_for('about') }}" class="btn btn-secondary my-2">About</a>
-          </p>
+          <h2 class="jumbotron-heading"><p>Hit or Not?</p></h2>
+          <p class="lead text-muted">Predicting the view counts of K-Pop music video on YouTube</p>
+            <a id="russo" href="{{ url_for('index') }}" class="btn btn-danger my-2 ">More video</a>
+            <a id="russo" href="{{ url_for('about') }}" class="btn btn-secondary my-2">About</a>
         </div>
     </section>
     <div class="album bg-light">
