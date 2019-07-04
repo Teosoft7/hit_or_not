@@ -1,14 +1,14 @@
 # import common 
 import sys
 sys.path.append('../common/')
-from functions import get_videos, get_view_data, create_chart
+from functions import get_videos, get_view_data, create_chart, do_predict
 
 import pandas as pd
 from flask import Flask, request, render_template, jsonify, redirect, url_for
 from bokeh.embed import components
 from pymongo import MongoClient
 
-connection = MongoClient()
+connection = MongoClient(port=47017)
 db = connection['youtube_scrap']
 
 app = Flask(__name__, static_url_path="")
@@ -32,7 +32,8 @@ def detail():
     video_id = request.args.get('video_id')
     data = get_view_data(db, video_id)
     hover=None
-    plot = create_chart(data, "View Counts", hover)
+    future = do_predict(pd.DataFrame(data))
+    plot = create_chart(future, "View Counts", hover)
     script, div = components(plot)
 
     return render_template('detail.html', counts=len(data), 

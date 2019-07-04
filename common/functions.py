@@ -81,8 +81,9 @@ def create_chart(data, title, hover_tool=None,
     if hover_tool:
         tools = [hover_tool,]
 
-    counts = np.array([row['view_count'] for row in data])
-    
+    # counts = np.array([row['view_count'] for row in data])
+    counts = data['yhat']
+
     label=''
     if counts.min() > 1_000_000:
         counts = counts / 1_000_000
@@ -91,13 +92,14 @@ def create_chart(data, title, hover_tool=None,
         counts = counts / 1_000
         label = ' (K)'
 
-    times = [row['timestamp'] for row in data]
+    # times = [row['timestamp'] for row in data]
+    times = data['ds']
     p = figure(plot_width=width, 
                plot_height=height,
                x_axis_type="datetime")
                
     p.line(times, counts, line_width=2, color='navy', legend='view counts')
-
+    
     p.title.text = title
     p.legend.location = "top_left"
     p.grid.grid_line_alpha = 0
