@@ -8,9 +8,6 @@ from datetime import datetime
 from fbprophet import Prophet
 
 from pymongo import MongoClient, DESCENDING
-# from bokeh.models import (HoverTool, FactorRange, Plot, LinearAxis, Grid,
-#                           Range1d)
-from bokeh.models.glyphs import VBar
 from bokeh.plotting import figure
 
 # Used for index.html page
@@ -96,7 +93,8 @@ def create_chart(data, title, hover_tool=None,
     times = data['ds']
     p = figure(plot_width=width, 
                plot_height=height,
-               x_axis_type="datetime")
+               x_axis_type="datetime",
+               sizing_mode='scale_width')
                
     p.line(times, counts, line_width=2, color='navy', legend='view counts')
     
