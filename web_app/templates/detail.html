@@ -2,8 +2,6 @@
 <html>
     <head>
         <title>Video Detail</title>
-        <script type="text/javascript" src="brython.js"></script>
-        <script type="text/javascript" src="brython_stdlib.js"></script>
         <link rel="stylesheet" href="css/styles.css">        
         <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,17 +19,15 @@
         <style>
         </style>
     </head>
-    
     <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-9 border-bottom">
-              <a class="mb-1 h1" href="{{ url_for('index') }}">
+            <div class="col-md-9 border-bottom">              
+              <h1 class="h2">
+                <a class="mb-1 h2" href="{{ url_for('index') }}">
                 <i class="material-icons">home</i> </a>
-              <h1 class="h2">Predictions</h1>
-              <div class="btn-toolbar mb-2 mb-md-0"></div>
+                Predictions</h1>
             </div>
-
             <div class='col-md-9'>
                 {{ the_div|safe }}
                 {{ the_script|safe }}    
