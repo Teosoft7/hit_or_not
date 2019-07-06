@@ -8,7 +8,9 @@ from datetime import datetime
 from fbprophet import Prophet
 
 from pymongo import MongoClient, DESCENDING
+
 from bokeh.plotting import figure
+from bokeh.models import NumeralTickFormatter
 
 # Used for index.html page
 def get_videos(db, count=3):
@@ -74,30 +76,45 @@ def do_predict(data, periods=3):
 def create_chart(data, title, hover_tool=None,
                  width=1024, height=480):
     """Create a line chart with data"""
-    tools = []
-    if hover_tool:
-        tools = [hover_tool,]
 
-    # counts = np.array([row['view_count'] for row in data])
     counts = data['yhat']
+    times = data['ds']
+    predict_times = times.tail(4)
 
     label=''
+    divider = 1
     if counts.min() > 1_000_000:
-        counts = counts / 1_000_000
+        divider = 1_000_000
         label = ' (M)'
     elif counts.min() > 1_000:
-        counts = counts / 1_000
+        divider = 1_000
         label = ' (K)'
 
-    # times = [row['timestamp'] for row in data]
-    times = data['ds']
+    counts = data['yhat'] / divider
+    predict_counts = data['yhat'].tail(4) / divider
+    predict_upper = data['yhat_upper'].tail(4) / divider
+    predict_lower = data['yhat_lower'].tail(4) / divider
+
     p = figure(plot_width=width, 
                plot_height=height,
                x_axis_type="datetime",
                sizing_mode='scale_width')
-               
-    p.line(times, counts, line_width=2, color='navy', legend='view counts')
-    
+
+    p.line(times, counts, 
+           line_width=2, color='navy', legend='view counts')
+
+    p.line(predict_times, predict_counts, 
+           line_width=3, color='red', line_dash='dashed', 
+           legend='prediction')
+
+    p.line(predict_times, predict_upper, 
+           line_width=2, color='red', line_dash='dotted', 
+           legend='upper bound')
+
+    p.line(predict_times, predict_lower, 
+           line_width=2, color='red', line_dash='dotted', 
+           legend='lower bound')
+
     p.title.text = title
     p.legend.location = "top_left"
     p.grid.grid_line_alpha = 0
@@ -105,6 +122,7 @@ def create_chart(data, title, hover_tool=None,
     p.yaxis.axis_label = 'Views' + label
     p.ygrid.band_fill_color = "olive"
     p.ygrid.band_fill_alpha = 0.1
+    p.yaxis[0].formatter = NumeralTickFormatter(format="0.000")
 
     return p
 
