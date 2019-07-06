@@ -120,8 +120,8 @@ def create_chart(data, title, hover_tool=None,
     p.grid.grid_line_alpha = 0
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'Views' + label
-    p.ygrid.band_fill_color = "olive"
-    p.ygrid.band_fill_alpha = 0.1
+    p.background_fill_color = "beige"
+    p.background_fill_alpha = 0.5
     p.yaxis[0].formatter = NumeralTickFormatter(format="0.000")
 
     return p
