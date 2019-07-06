@@ -25,213 +25,175 @@
   </head>
   <body>
     <div class="wrapper ">
-        <div class="sidebar" data-color="purple" data-background-color="white" data-image="/assets/img/sidebar-1.jpg">
-          <!--
-            Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-        
-            Tip 2: you can also add an image using data-image tag
-        -->
-          <div class="logo">
-            <a href="#" class="simple-text logo-normal">
-              Hit or Not
-            </a>
+      <div class="sidebar" data-color="purple" data-background-color="white" data-image="/assets/img/sidebar-1.jpg">
+        <div class="logo">
+          <a href="#" class="simple-text logo-normal">
+            Hit or Not
+          </a>
+        </div>
+        <div class="sidebar-wrapper">
+          <ul class="nav">
+            <li class="nav-item active  ">
+              <a class="nav-link" href="{{ url_for('index') }}">
+                <i class="material-icons">dashboard</i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#">
+                <i class="material-icons">stars</i>
+                <p>Hot Trending</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#">
+                <i class="material-icons">visibility</i>
+                <p>Most Watched</p>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#">
+                <i class="material-icons">new_releases</i>
+                <p>New Releases</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Sidebar End-->        
+      <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+          <div class="container-fluid">
+            <div class="navbar-wrapper">
+              <a class="navbar-brand" href="#">Dashboard</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="navbar-toggler-icon icon-bar"></span>
+              <span class="navbar-toggler-icon icon-bar"></span>
+              <span class="navbar-toggler-icon icon-bar"></span>
+            </button>
           </div>
-          <div class="sidebar-wrapper">
-            <ul class="nav">
-              <li class="nav-item active  ">
-                <a class="nav-link" href="{{ url_for('index') }}">
-                  <i class="material-icons">dashboard</i>
-                  <p>Dashboard</p>
-                </a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="#">
-                  <i class="material-icons">stars</i>
-                  <p>Hot Trending</p>
-                </a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="#">
-                  <i class="material-icons">visibility</i>
-                  <p>Most Watched</p>
-                </a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="#">
-                  <i class="material-icons">new_releases</i>
-                  <p>New Releases</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>        
-        <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-              <div class="container-fluid">
-                <div class="navbar-wrapper">
-                  <a class="navbar-brand" href="#">Dashboard</a>
+        </nav>
+        <!-- End Navbar -->
+
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="fa fa-youtube"></i>
+                    </div>
+                    <p class="card-category">Videos</p>
+                    <h3 class="card-title">{{ "{:,}".format(stats['videos']) }}</h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons text-danger">date_range</i>
+                      <a href="#">Since 2019</a>
+                    </div>
+                  </div>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="navbar-toggler-icon icon-bar"></span>
-                  <span class="navbar-toggler-icon icon-bar"></span>
-                  <span class="navbar-toggler-icon icon-bar"></span>
-                </button>
               </div>
-            </nav>
-            <!-- End Navbar -->
-            <div class="content">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card card-stats">
-                      <div class="card-header card-header-danger card-header-icon">
-                        <div class="card-icon">
-                            <i class="fa fa-youtube"></i>
-                        </div>
-                        <p class="card-category">Videos</p>
-                        <h3 class="card-title">270
-                        </h3>
-                      </div>
-                      <div class="card-footer">
-                        <div class="stats">
-                          <i class="material-icons text-danger">date_range</i>
-                          <a href="#">Since 2019</a>
-                        </div>
-                      </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">visibility</i>
                     </div>
+                    <p class="card-category">View increments</p>
+                    <h3 class="card-title">{{ "{:,}".format(stats['increments']) }}</h3>
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card card-stats">
-                      <div class="card-header card-header-success card-header-icon">
-                        <div class="card-icon">
-                          <i class="material-icons">visibility</i>
-                        </div>
-                        <p class="card-category">Increment</p>
-                        <h3 class="card-title">34,245</h3>
-                      </div>
-                      <div class="card-footer">
-                        <div class="stats">
-                          <i class="material-icons">update</i> Last 12 Hours
-                        </div>
-                      </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons">update</i> Last 12 Hours
                     </div>
                   </div>
                 </div>
-                <div class="row">
+              </div>
+            </div>
+            <div class="row">
+                {% for i in range(0, counts) %}
                   <div class="col-md-4">
                     <div class="card card-chart">
                       <div class="card-header card-header-danger">
-                          <img src="{{ "https://img.youtube.com/vi/" + last_video[0]['video_id'] + "/hqdefault.jpg" }}"  
+                        <img src="{{ "https://img.youtube.com/vi/" + videos[i]['video_id'] + "/hqdefault.jpg" }}"  
                           class="card-img-top" alt="..." width="100%"> 
                       </div>
                       <div class="card-body">
-                        <h4 class="card-title">{{ last_video[0]['title'] }}</h4>
+                        <h4 class="card-title">{{ videos[i]['title'] }}</h4>
                         <p class="card-category">
-                          <span class="text-success"><i class="material-icons">visibility</i> {{ last_video[0]['view_count'] }} </span> views.</p>
+                          <span class="text-success h5"><i class="material-icons">visibility</i> 
+                            {{ videos[i]['view_count'] }} views.</span> 
+                          <a href="{{ url_for('detail', video_id=videos[i]['video_id']) }}" 
+                            class="btn btn-info btn-sm btn-round float-right">predict</a>
+                        </p>
                       </div>
                       <div class="card-footer">
                         <div class="stats">
-                          <i class="material-icons">access_time</i> updated 4 minutes ago
+                          <i class="material-icons">date_range</i> {{ videos[i]['published'] }}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                      <div class="card card-chart">
-                        <div class="card-header card-header-success">
-                            <img src="{{ "https://img.youtube.com/vi/" + last_video[1]['video_id'] + "/hqdefault.jpg" }}"  
-                            class="card-img-top" alt="..." width="100%"> 
-                        </div>
-                        <div class="card-body">
-                          <h4 class="card-title">{{ last_video[1]['title'] }}</h4>
-                          <p class="card-category">
-                            <span class="text-success"><i class="material-icons">visibility</i> {{ last_video[1]['view_count'] }} </span> views.</p>
-                        </div>
-                        <div class="card-footer">
-                          <div class="stats">
-                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-chart">
-                          <div class="card-header card-header-warning">
-                              <img src="{{ "https://img.youtube.com/vi/" + last_video[2]['video_id'] + "/hqdefault.jpg" }}"  
-                              class="card-img-top" alt="..." width="100%"> 
-                          </div>
-                          <div class="card-body">
-                            <h4 class="card-title">{{ last_video[2]['title'] }}</h4>
-                            <p class="card-category">
-                              <span class="text-success"><i class="material-icons">visibility</i> {{ last_video[2]['view_count'] }} </span> views.</p>
-                          </div>
-                          <div class="card-footer">
-                            <div class="stats">
-                              <i class="material-icons">access_time</i> updated 4 minutes ago
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                </div>
+                {% endfor %}
             </div>
-            <footer class="footer">
-              <div class="container-fluid">
-                <div class="copyright float-right">
-                  &copy;
-                  <script>
-                    document.write(new Date().getFullYear())
-                  </script>, made by Taeho Jeon
-                </div>
-              </div>
-            </footer>
           </div>
+          <footer class="footer">
+            <div class="container-fluid">
+              <div class="copyright float-right">
+                &copy; 2019, predict.proba.in by Taeho Jeon
+              </div>
+            </div>
+          </footer>
         </div>
-    </main> -->
+      </div>
     </div>
 
       <!--   Core JS Files   -->
-  <script src="/assets/js/core/jquery.min.js"></script>
-  <script src="/assets/js/core/popper.min.js"></script>
-  <script src="/assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!-- Plugin for the momentJs  -->
-  <script src="/assets/js/plugins/moment.min.js"></script>
-  <!--  Plugin for Sweet Alert -->
-  <script src="/assets/js/plugins/sweetalert2.js"></script>
-  <!-- Forms Validations Plugin -->
-  <script src="/assets/js/plugins/jquery.validate.min.js"></script>
-  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <script src="/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
-  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <script src="/assets/js/plugins/bootstrap-selectpicker.js"></script>
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <script src="/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
-  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-  <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
-  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <script src="/assets/js/plugins/bootstrap-tagsinput.js"></script>
-  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <script src="/assets/js/plugins/jasny-bootstrap.min.js"></script>
-  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <script src="/assets/js/plugins/fullcalendar.min.js"></script>
-  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <script src="/assets/js/plugins/jquery-jvectormap.js"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="/assets/js/plugins/nouislider.min.js"></script>
-  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-  <!-- Library for adding dinamically elements -->
-  <script src="../assets/js/plugins/arrive.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chartist JS -->
-  <script src="/assets/js/plugins/chartist.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="/assets/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="/assets/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
+    <script src="/assets/js/core/jquery.min.js"></script>
+    <script src="/assets/js/core/popper.min.js"></script>
+    <script src="/assets/js/core/bootstrap-material-design.min.js"></script>
+    <script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Plugin for the momentJs  -->
+    <script src="/assets/js/plugins/moment.min.js"></script>
+    <!--  Plugin for Sweet Alert -->
+    <script src="/assets/js/plugins/sweetalert2.js"></script>
+    <!-- Forms Validations Plugin -->
+    <script src="/assets/js/plugins/jquery.validate.min.js"></script>
+    <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+    <script src="/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+    <script src="/assets/js/plugins/bootstrap-selectpicker.js"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+    <script src="/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+    <script src="/assets/js/plugins/jquery.dataTables.min.js"></script>
+    <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+    <script src="/assets/js/plugins/bootstrap-tagsinput.js"></script>
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="/assets/js/plugins/jasny-bootstrap.min.js"></script>
+    <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+    <script src="/assets/js/plugins/fullcalendar.min.js"></script>
+    <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+    <script src="/assets/js/plugins/jquery-jvectormap.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="/assets/js/plugins/nouislider.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <!-- Library for adding dinamically elements -->
+    <script src="../assets/js/plugins/arrive.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chartist JS -->
+    <script src="/assets/js/plugins/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="/assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="/assets/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
 
     <script>
         $(document).ready(function() {

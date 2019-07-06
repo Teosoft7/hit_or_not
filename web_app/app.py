@@ -17,9 +17,14 @@ app = Flask(__name__, static_url_path="")
 def index():
     """Return the main page."""
     videos = get_videos(db, count=3)
+    stats= {
+        'videos': 123,
+        'increments': 4000,
+    }
     return render_template('index.html', 
-                            counts=len(videos), 
-                            last_video=videos)
+                            counts=len(videos),
+                            stats=stats, 
+                            videos=videos)
 
 @app.route('/about')
 def about():
