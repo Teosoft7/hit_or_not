@@ -3,7 +3,6 @@
   <meta charset="UTF-8">
   <head>
     <title>Hit or Not</title>
-
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -15,12 +14,7 @@
 
     <!-- <script type="text/javascript" src="brython.js"></script>
     <script type="text/javascript" src="brython_stdlib.js"></script> -->
-
     <!-- <link rel="stylesheet" href="css/styles.css"> -->
-    
-    <!-- Custom styles for this template -->
-    <!-- <link href="jumbotron.css" rel="stylesheet">
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/"> -->
 
   </head>
   <body>
@@ -66,7 +60,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="#">Dashboard</a>
+              <div class="navbar-brand h5">Dashboard for</div>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="sr-only">Toggle navigation</span>
@@ -74,6 +68,9 @@
               <span class="navbar-toggler-icon icon-bar"></span>
               <span class="navbar-toggler-icon icon-bar"></span>
             </button>
+            <div class="collapse navbar-collapse justify-content-start h5">
+              Predicting the view counts of K-Pop music video on YouTube
+            </div>
           </div>
         </nav>
         <!-- End Navbar -->
@@ -117,11 +114,10 @@
             <div class="row">
                 {% for i in range(0, counts) %}
                   <div class="col-md-4">
-                    <div class="card card-chart">
-                      <div class="card-header card-header-danger">
+                    <div class="card">
                         <img src="{{ "https://img.youtube.com/vi/" + videos[i]['video_id'] + "/hqdefault.jpg" }}"  
-                          class="card-img-top" alt="..." width="100%"> 
-                      </div>
+                          class="card-img-top" alt="Card image cap" width="100%"> 
+
                       <div class="card-body">
                         <h4 class="card-title">{{ videos[i]['title'] }}</h4>
                         <p class="card-category">
@@ -141,14 +137,19 @@
                 {% endfor %}
             </div>
           </div>
-          <footer class="footer">
+          <div class="row">
+            <div class="col-md-12 float-right">
+                <a href="{{ url_for('index') }}" class="btn btn-primary btn-round float-right">More Video</a>          
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
             <div class="container-fluid">
               <div class="copyright float-right">
                 &copy; 2019, predict.proba.in by Taeho Jeon
               </div>
             </div>
           </footer>
-        </div>
       </div>
     </div>
 

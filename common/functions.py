@@ -64,13 +64,13 @@ def get_increments(db, period=4):
 def get_count_string(value):
     """Return string value with Billion/Million/Kilo"""
     if value > 1_000_000_000:
-        return "{:,.3f} B".format(value / 1_000_000_000)
+        return "{:,.1f} B".format(value / 1_000_000_000)
     elif value > 1_000_000:
-        return "{:,.3f} M".format(value / 1_000_000)
+        return "{:,.1f} M".format(value / 1_000_000)
     elif value > 1_000:
-        return "{:,.3f} K".format(value / 1_000)
+        return "{:,.1f} K".format(value / 1_000)
     
-    return "{:,.3f}".format(value)
+    return "{:,.1f}".format(value)
 
 def get_view_data(db, video_id):
     """Return view_count collection for video_id"""
