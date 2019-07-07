@@ -125,6 +125,34 @@ def get_hot_video(db, count=10, hours=4):
     # return video list
     return video_views[:count]
 
+def get_most_watched_video(db, count=10):
+    """Return top 10 most view increased video for last n(=4) hours"""
+
+    # get max view_count among the view counts group by video_id
+    view_count_coll = db['view_count']
+    current_cur = view_count_coll.aggregate([
+        {'$group' : {'_id':'$video_id', 
+                    'view_count':{'$max':'$view_count'} 
+                    }
+        },
+        { "$sort": { "view_count": -1 } }
+    ])
+
+    # save query result to list
+    video_views = [row for row in current_cur]
+    
+    # loop through count elements
+    # get video detail and set view_count & increment
+    video_coll = db['video_detail']
+    for row in video_views[:count]:
+        video_id = row['_id']
+        cur = video_coll.find({'video_id': video_id})
+        video = cur.next()
+        row.update(video)
+
+    # return video list
+    return video_views[:count]
+
 def do_predict(data, periods=3):
     """Return predicted view_count for period(default:3) days """
     # initialize Prophet model

@@ -78,7 +78,60 @@
         <div class="content">
           <div class="container-fluid">
             <div class="row">
-                TABLE
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-success">
+                    <h4 class="card-title ">Most Watched</h4>
+                    <p class="card-category"> Most watched video in the list</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-success">
+                          <th>
+                            #
+                          </th>
+                          <th>
+                              Title
+                          </th>
+                          <th>
+                              Published
+                          </th>
+                          <th>
+                              Total View
+                          </th>
+                          <th>
+                          </th>
+                        </thead>
+                        <tbody>
+                          {% for i in range(0, count) %}
+                            <tr>
+                              <td>
+                                {{i + 1}}
+                              </td>
+                              <td>
+                              {{videos[i]['title']}}
+                              </td>
+                              <td>
+                              {{videos[i]['published']}}
+                              </td>
+                              <td class="text-success">
+                              {{videos[i]['view_count']}}
+                              </td>
+                              <td class="td-actions text-right">
+                                <a href="{{url_for('detail', video_id=videos[i]['video_id'])}}" 
+                                  class="btn btn-success btn-round">
+                                  <i class="material-icons">navigate_next</i>
+                                </a>
+                              </td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
