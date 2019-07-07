@@ -6,7 +6,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 
     <!-- CSS Files -->
@@ -14,16 +14,16 @@
 
     <!-- <script type="text/javascript" src="brython.js"></script>
     <script type="text/javascript" src="brython_stdlib.js"></script> -->
-    <!-- <link rel="stylesheet" href="css/styles.css"> -->
+    <link rel="stylesheet" href="css/styles.css">
 
   </head>
   <body>
     <div class="wrapper ">
       <div class="sidebar" data-color="purple" data-background-color="white" data-image="/assets/img/sidebar-1.jpg">
         <div class="logo">
-          <a href="#" class="simple-text logo-normal">
+          <div class="simple-text logo-normal russo">
             Hit or Not
-          </a>
+          </div>
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
@@ -84,7 +84,7 @@
                     <div class="card-icon">
                       <i class="fa fa-youtube"></i>
                     </div>
-                    <p class="card-category">Videos</p>
+                    <p class="card-category russo">Videos</p>
                     <h3 class="card-title">{{ "{:,}".format(stats['videos']) }}</h3>
                   </div>
                   <div class="card-footer">
@@ -100,7 +100,7 @@
                     <div class="card-icon">
                       <i class="material-icons">visibility</i>
                     </div>
-                    <p class="card-category">Total Views</p>
+                    <p class="card-category russo">Total Views</p>
                     <h3 class="card-title">{{ stats['total_view'] }}</h3>
                   </div>
                   <div class="card-footer">
@@ -116,7 +116,7 @@
                     <div class="card-icon">
                       <i class="material-icons">show_chart</i>
                     </div>
-                    <p class="card-category">View increments</p>
+                    <p class="card-category russo">View increments</p>
                     <h3 class="card-title">{{ stats['increments'] }}</h3>
                   </div>
                   <div class="card-footer">
@@ -135,18 +135,22 @@
                           class="card-img-top" alt="Card image cap" width="100%"> 
 
                       <div class="card-body">
-                        <h4 class="card-title">{{ videos[i]['title'] }}</h4>
-                        <p class="card-category">
-                          <span class="text-success h5"><i class="material-icons">visibility</i> 
-                            {{ videos[i]['view_count'] }} views.</span> 
+                        <h4 class="card-title kr-dh">{{ videos[i]['title'] }}</h4>
+                        <div class="card-category">
+                          <span class="text-rose h5 russo"><i class="material-icons">visibility</i> 
+                            {{ videos[i]['view_count'] }} views</span> 
                           <a href="{{ url_for('detail', video_id=videos[i]['video_id']) }}" 
-                            class="btn btn-info btn-sm btn-round float-right">predict</a>
-                        </p>
+                            class="btn btn-info btn-sm btn-round float-right russo">predict</a>  
+                        </div>
                       </div>
                       <div class="card-footer">
                         <div class="stats">
                           <i class="material-icons">date_range</i> {{ videos[i]['published'] }}
                         </div>
+                        <a href="{{ videos[i]['url'] }}" 
+                        class="btn btn-danger btn-sm btn-round float-right">
+                          <i class="material-icons">play_arrow</i>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -155,14 +159,14 @@
           </div>
           <div class="row">
             <div class="col-md-12 float-right">
-                <a href="{{ url_for('index') }}" class="btn btn-primary btn-round float-right">More Video</a>          
+                <a href="{{ url_for('index') }}" class="btn btn-primary btn-round float-right russo">More Video</a>          
             </div>
           </div>
         </div>
         <footer class="footer">
             <div class="container-fluid">
               <div class="copyright float-right">
-                &copy; 2019, predict.proba.in by Taeho Jeon
+                &copy; 2019 http://predict.proba.in by Taeho Jeon
               </div>
             </div>
           </footer>

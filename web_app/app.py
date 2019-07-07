@@ -23,18 +23,43 @@ app = Flask(__name__, static_url_path="")
 @app.route('/')
 def index():
     """Return the main page."""
+    # get random 3 videos for display
     videos = get_videos(db, count=3)
-    total_view, increments = get_sum_view_count(db)
 
+    # get total view counts and increments for last 4 hours
+    total_view, increments = get_sum_view_count(db)
     stats= {
         'videos': get_collection_count(db, 'video_detail'),
         'increments': get_count_string(increments),
         'total_view': get_count_string(total_view)
     }
+
+    # return with template
     return render_template('index.html', 
                             counts=len(videos),
                             stats=stats, 
                             videos=videos)
+
+@app.route('/hottrend')
+def hot_trend():
+    """Return hot trend page."""
+    # Need to add data set for hot trend
+    # Hot : top 10 most increments views for last 4 hours
+    return render_template('hot_trend.html')
+
+@app.route('/mostwatched')
+def most_watched():
+    """Return most watched page."""
+    # Need to add data set for most_watched
+    # Most watched : top 10 most watched video
+    return render_template('most_watched.html')
+
+@app.route('/newreleased')
+def new_released():
+    """Return new released page."""
+    # Need to add data set for new released
+    # new_released : top 10 most recently released video
+    return render_template('new_released.html')
 
 @app.route('/about')
 def about():

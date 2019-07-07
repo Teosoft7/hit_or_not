@@ -1,10 +1,14 @@
-@import "https://fonts.googleapis.com/icon?family=Material+Icons"; 
 
-p {
-    font-family: 'Russo One', sans-serif;
+
+.kr-dh {
+    font-family: 'Do Hyeon', sans-serif;
 }
 
-#russo {
+.kr-ng {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+.russo {
     font-family: 'Russo One', sans-serif;
 }
 
