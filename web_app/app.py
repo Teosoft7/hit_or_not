@@ -7,7 +7,7 @@ from functions import (get_videos,
                         create_chart, 
                         do_predict,
                         get_count_string,
-                        get_increments,
+                        get_sum_view_count,
                         get_collection_count,)
 
 import pandas as pd
@@ -24,9 +24,12 @@ app = Flask(__name__, static_url_path="")
 def index():
     """Return the main page."""
     videos = get_videos(db, count=3)
+    total_view, increments = get_sum_view_count(db)
+
     stats= {
         'videos': get_collection_count(db, 'video_detail'),
-        'increments': get_count_string(get_increments(db)),
+        'increments': get_count_string(increments),
+        'total_view': get_count_string(total_view)
     }
     return render_template('index.html', 
                             counts=len(videos),

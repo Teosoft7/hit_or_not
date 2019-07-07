@@ -54,12 +54,28 @@ def get_collection_count(db, collection_name):
     coll = db[collection_name]
     return coll.count_documents({})
 
-def get_increments(db, period=4):
-    """Return sum of view_count for last period(default=12) hours"""
+def get_sum_view_count(db, period=4):
+    """Return sum of max(view_counts) and sum of view counts for last period(default=4) hours"""
     ago = datetime.now() - timedelta(hours=period)
     coll = db['view_count']
-    cur = coll.find({'timestamp': {"$gt": ago}})
-    return sum([row['view_count'] for row in cur])
+    min_cur = coll.aggregate([
+        {'$match': {'timestamp': {"$gt": ago}}},
+        {'$group' : {'_id':'$video_id', 
+                 'view_count':{'$min':'$view_count'} 
+                }
+        }
+    ])
+    max_cur = coll.aggregate([
+        {'$match': {'timestamp': {"$gt": ago}}},
+        {'$group' : {'_id':'$video_id', 
+                 'view_count':{'$max':'$view_count'} 
+                }
+        }
+    ])   
+
+    new_value = sum([row['view_count'] for row in max_cur])
+    old_value = sum([row['view_count'] for row in min_cur])
+    return new_value, new_value - old_value
 
 def get_count_string(value):
     """Return string value with Billion/Million/Kilo"""

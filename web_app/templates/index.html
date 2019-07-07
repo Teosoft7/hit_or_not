@@ -60,7 +60,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <div class="navbar-brand h5">Dashboard for</div>
+              <div class="navbar-brand h5">Prediction Dashboard</div>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="sr-only">Toggle navigation</span>
@@ -68,7 +68,7 @@
               <span class="navbar-toggler-icon icon-bar"></span>
               <span class="navbar-toggler-icon icon-bar"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-start h5">
+            <div class="collapse navbar-collapse justify-content-end h5">
               Predicting the view counts of K-Pop music video on YouTube
             </div>
           </div>
@@ -89,7 +89,7 @@
                   </div>
                   <div class="card-footer">
                     <div class="stats">
-                      <i class="material-icons text-danger">music_video</i> Monitoring Video Counts
+                      <i class="material-icons text-danger">music_video</i> Monitoring Video
                     </div>
                   </div>
                 </div>
@@ -100,12 +100,28 @@
                     <div class="card-icon">
                       <i class="material-icons">visibility</i>
                     </div>
+                    <p class="card-category">Total Views</p>
+                    <h3 class="card-title">{{ stats['total_view'] }}</h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons">update</i> Just before
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">show_chart</i>
+                    </div>
                     <p class="card-category">View increments</p>
                     <h3 class="card-title">{{ stats['increments'] }}</h3>
                   </div>
                   <div class="card-footer">
                     <div class="stats">
-                      <i class="material-icons">update</i> Last 4 Hours
+                      <i class="material-icons">date_range</i> Last 4 Hours
                     </div>
                   </div>
                 </div>
