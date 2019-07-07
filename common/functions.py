@@ -4,7 +4,7 @@ import time
 
 from matplotlib import pyplot as plt
 from matplotlib import dates as mdates
-from datetime import datetime
+from datetime import datetime, timedelta
 from fbprophet import Prophet
 
 from pymongo import MongoClient, DESCENDING
@@ -48,6 +48,29 @@ def get_videos(db, count=3):
 
     # print(result)
     return result
+
+def get_collection_count(db, collection_name):
+    """Return total documents count of collection"""
+    coll = db[collection_name]
+    return coll.count_documents({})
+
+def get_increments(db, period=4):
+    """Return sum of view_count for last period(default=12) hours"""
+    ago = datetime.now() - timedelta(hours=period)
+    coll = db['view_count']
+    cur = coll.find({'timestamp': {"$gt": ago}})
+    return sum([row['view_count'] for row in cur])
+
+def get_count_string(value):
+    """Return string value with Billion/Million/Kilo"""
+    if value > 1_000_000_000:
+        return "{:,.3f} B".format(value / 1_000_000_000)
+    elif value > 1_000_000:
+        return "{:,.3f} M".format(value / 1_000_000)
+    elif value > 1_000:
+        return "{:,.3f} K".format(value / 1_000)
+    
+    return "{:,.3f}".format(value)
 
 def get_view_data(db, video_id):
     """Return view_count collection for video_id"""

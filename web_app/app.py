@@ -1,7 +1,14 @@
 # import common 
 import sys
 sys.path.append('../common/')
-from functions import get_videos, get_view_data, create_chart, do_predict
+
+from functions import (get_videos, 
+                        get_view_data, 
+                        create_chart, 
+                        do_predict,
+                        get_count_string,
+                        get_increments,
+                        get_collection_count,)
 
 import pandas as pd
 from flask import Flask, request, render_template, jsonify, redirect, url_for
@@ -18,8 +25,8 @@ def index():
     """Return the main page."""
     videos = get_videos(db, count=3)
     stats= {
-        'videos': 123,
-        'increments': 4000,
+        'videos': get_collection_count(db, 'video_detail'),
+        'increments': get_count_string(get_increments(db)),
     }
     return render_template('index.html', 
                             counts=len(videos),
