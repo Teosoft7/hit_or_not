@@ -4,7 +4,7 @@ import time
 
 from matplotlib import pyplot as plt
 from matplotlib import dates as mdates
-from datetime import datetime
+from datetime import datetime, timedelta
 from fbprophet import Prophet
 
 from pymongo import MongoClient, DESCENDING
@@ -48,6 +48,45 @@ def get_videos(db, count=3):
 
     # print(result)
     return result
+
+def get_collection_count(db, collection_name):
+    """Return total documents count of collection"""
+    coll = db[collection_name]
+    return coll.count_documents({})
+
+def get_sum_view_count(db, period=4):
+    """Return sum of max(view_counts) and sum of view counts for last period(default=4) hours"""
+    ago = datetime.now() - timedelta(hours=period)
+    coll = db['view_count']
+    min_cur = coll.aggregate([
+        {'$match': {'timestamp': {"$gt": ago}}},
+        {'$group' : {'_id':'$video_id', 
+                 'view_count':{'$min':'$view_count'} 
+                }
+        }
+    ])
+    max_cur = coll.aggregate([
+        {'$match': {'timestamp': {"$gt": ago}}},
+        {'$group' : {'_id':'$video_id', 
+                 'view_count':{'$max':'$view_count'} 
+                }
+        }
+    ])   
+
+    new_value = sum([row['view_count'] for row in max_cur])
+    old_value = sum([row['view_count'] for row in min_cur])
+    return new_value, new_value - old_value
+
+def get_count_string(value):
+    """Return string value with Billion/Million/Kilo"""
+    if value > 1_000_000_000:
+        return "{:,.1f} B".format(value / 1_000_000_000)
+    elif value > 1_000_000:
+        return "{:,.1f} M".format(value / 1_000_000)
+    elif value > 1_000:
+        return "{:,.1f} K".format(value / 1_000)
+    
+    return "{:,.1f}".format(value)
 
 def get_view_data(db, video_id):
     """Return view_count collection for video_id"""
@@ -120,8 +159,8 @@ def create_chart(data, title, hover_tool=None,
     p.grid.grid_line_alpha = 0
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'Views' + label
-    p.ygrid.band_fill_color = "olive"
-    p.ygrid.band_fill_alpha = 0.1
+    p.background_fill_color = "beige"
+    p.background_fill_alpha = 0.5
     p.yaxis[0].formatter = NumeralTickFormatter(format="0.000")
 
     return p
