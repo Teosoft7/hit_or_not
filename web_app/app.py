@@ -1,15 +1,18 @@
-# import common 
+
 import sys
 sys.path.append('../common/')
 
+# my functions
 from functions import (get_videos, 
                         get_view_data, 
                         create_chart, 
                         do_predict,
                         get_count_string,
                         get_sum_view_count,
-                        get_collection_count,)
+                        get_collection_count,
+                        get_hot_video,)
 
+# import common libraries
 import pandas as pd
 from flask import Flask, request, render_template, jsonify, redirect, url_for
 from bokeh.embed import components
@@ -45,7 +48,15 @@ def hot_trend():
     """Return hot trend page."""
     # Need to add data set for hot trend
     # Hot : top 10 most increments views for last 4 hours
-    return render_template('hot_trend.html')
+    count = 10
+    videos = get_hot_video(db, count=count)
+    
+    # apply format for large numbers
+    for video in videos:
+        video['view_count'] = get_count_string(video['view_count'])
+        video['increment'] = get_count_string(video['increment'])
+
+    return render_template('hot_trend.html', videos=videos, count=count)
 
 @app.route('/mostwatched')
 def most_watched():

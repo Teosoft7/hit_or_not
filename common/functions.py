@@ -96,8 +96,37 @@ def get_view_data(db, video_id):
 
     return [record for record in cursor]
 
+def get_hot_video(db, count=10, hours=4):
+    """Return top 10 most view increased video for last n(=4) hours"""
+    # set 4 hours ago
+    ago = datetime.now() - timedelta(hours=hours)
+    view_count_coll = db['view_count']
+    cur = view_count_coll.aggregate([
+        {'$match': {'timestamp': {"$gt": ago}}},
+        {'$group': {'_id':'$video_id', 
+                    'prev_count': {'$min':'$view_count'} ,
+                    'view_count': {'$max':'$view_count'}} },
+        {'$addFields': {'increment': {'$subtract': ['$view_count', '$prev_count']}}},
+        { "$sort": { "increment": -1 } }
+    ])
+
+    # save query result to list
+    video_views = [row for row in cur]
+    
+    # loop through count elements
+    # get video detail and set view_count & increment
+    video_coll = db['video_detail']
+    for row in video_views[:count]:
+        video_id = row['_id']
+        cur = video_coll.find({'video_id': video_id})
+        video = cur.next()
+        row.update(video)
+
+    # return video list
+    return video_views[:count]
+
 def do_predict(data, periods=3):
-    """Return predicted view_count for period days """
+    """Return predicted view_count for period(default:3) days """
     # initialize Prophet model
     m = Prophet()
 
@@ -165,6 +194,8 @@ def create_chart(data, title, hover_tool=None,
 
     return p
 
+
+
 def get_all_collection(coll, filters=None):
     """Returns the list of objects in mongodb collection"""
     cursor = coll.find({})
@@ -177,8 +208,7 @@ def draw_barchart(x,
                   ylabel='count',
                   title='Top 5', 
                   figsize=(8, 6)):
-    """Draw bar chart for top5 video"""
-    
+    """Draw bar chart for top5 video"""    
     fig, ax = plt.subplots(figsize=figsize)
     fig.suptitle(title)
 

@@ -27,26 +27,26 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="nav-item active  ">
+            <li class="nav-item active ">
               <a class="nav-link" href="{{ url_for('index') }}">
                 <i class="material-icons">dashboard</i>
                 <p>Dashboard</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ url_for('hot_trend') }}">
                 <i class="material-icons">stars</i>
                 <p>Hot Trending</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ url_for('most_watched') }}">
                 <i class="material-icons">visibility</i>
                 <p>Most Watched</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ url_for('new_released') }}">
                 <i class="material-icons">new_releases</i>
                 <p>New Releases</p>
               </a>
