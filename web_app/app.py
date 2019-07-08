@@ -13,7 +13,9 @@ from functions import (get_videos,
                        get_hot_video,
                        get_most_watched_video,
                        get_most_recent_video,
-                       get_video_detail,)
+                       get_video_detail,
+                       get_daily_view_count,
+                       create_bar_chart,)
 
 # import common libraries
 import pandas as pd
@@ -107,10 +109,15 @@ def detail():
     data = get_view_data(db, video_id)
     future = do_predict(pd.DataFrame(data))
     
+    view_by_day = pd.DataFrame(get_daily_view_count(db, video_id))
+
     # Draw a chart with Bokeh
-    plot = create_chart(future, "View Counts", None)
+    plot = create_bar_chart(view_by_day, 
+                            "View Counts", 
+                            video_id, 
+                            predicts=3)
     script, div = components(plot)
 
     return render_template('detail.html', count=len(data), 
-                            data=data, video=video, 
+                            data=view_by_day, video=video, 
                             the_script=script, the_div=div)

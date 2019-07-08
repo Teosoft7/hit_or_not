@@ -12,10 +12,10 @@
         <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
         <!-- CSS Files -->
         <link href="../assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
-        
-        <!-- CSS Files -->
+        <link rel="stylesheet" href="css/styles.css">
         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
@@ -33,30 +33,12 @@
         </style>
     </head>
     <body>
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a href="javascript:history.go(-1)" class="navbar-brand h5">Back</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end h5">
-            Predicting the view counts of K-Pop music video on YouTube
-          </div>
-        </div>
-      </nav>
-      <!-- End Navbar -->      
+    <div class="container">     
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 border-bottom">              
-              <h1 class="h2">{{ video['title'] }}</h1>
+              <h2 class="h3 russo">{{ video['title'] }}</h2>
             </div>
           </div>
           <div class="row">
@@ -67,14 +49,14 @@
                       <i class="fa fa-youtube"></i>
                     </div>
                   <p class="card-category">Published On</p>
-                  <h4 class="card-title"><small>{{video['published']}}</small>
-                  </h4>
+                  <h5 class="card-title"><small>{{video['published']}}</small>
+                  </h5>
                 </div>
                 <div class="card-footer">
-                  <div class="stats">
-                      <a href="{{video['url']}}"><i class="material-icons">link</i>
-                      Youtube</a>
-                  </div>
+                  <a class="stats" href="{{video['url']}}">
+                    <i class="material-icons">link</i>
+                    YouTube
+                  </a>
                 </div>
               </div>
             </div>
