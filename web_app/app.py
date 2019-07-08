@@ -4,18 +4,19 @@ sys.path.append('../common/')
 
 # my functions
 from functions import (get_videos, 
-                        get_view_data, 
-                        create_chart, 
-                        do_predict,
-                        get_count_string,
-                        get_sum_view_count,
-                        get_collection_count,
-                        get_hot_video,
-                        get_most_watched_video,)
+                       get_view_data, 
+                       create_chart, 
+                       do_predict,
+                       get_count_string,
+                       get_sum_view_count,
+                       get_collection_count,
+                       get_hot_video,
+                       get_most_watched_video,
+                       get_most_recent_video)
 
 # import common libraries
 import pandas as pd
-from flask import Flask, request, render_template, jsonify, redirect, url_for
+from flask import Flask, request, render_template, url_for
 from bokeh.embed import components
 from pymongo import MongoClient
 
@@ -40,7 +41,7 @@ def index():
 
     # return with template
     return render_template('index.html', 
-                            counts=len(videos),
+                            count=len(videos),
                             stats=stats, 
                             videos=videos)
 
@@ -77,8 +78,11 @@ def most_watched():
 def new_released():
     """Return new released page."""
     # Need to add data set for new released
-    # new_released : top 10 most recently released video
-    return render_template('new_released.html')
+    # new_released : top 6 most recently released video
+    count = 6
+    videos = get_most_recent_video(db, count=count)
+
+    return render_template('new_released.html', videos=videos, count=count)
 
 @app.route('/about')
 def about():
@@ -95,6 +99,6 @@ def detail():
     plot = create_chart(future, "View Counts", hover)
     script, div = components(plot)
 
-    return render_template('detail.html', counts=len(data), 
+    return render_template('detail.html', count=len(data), 
                             data=data, video=None, 
                             the_script=script, the_div=div)

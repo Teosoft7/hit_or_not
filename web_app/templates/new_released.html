@@ -36,7 +36,7 @@
             <li class="nav-item ">
                 <a class="nav-link" href="{{ url_for('hot_trend') }}">
                     <i class="material-icons">stars</i>
-                    <p>Hot Trending</p>
+                    <p>Hot Trends</p>
                 </a>
             </li>
             <li class="nav-item ">
@@ -78,7 +78,33 @@
         <div class="content">
           <div class="container-fluid">
             <div class="row">
-                TABLE
+                {% for i in range(0, count) %}
+                <div class="col-md-4">
+                  <div class="card">
+                      <img src="{{ "https://img.youtube.com/vi/" + videos[i]['video_id'] + "/hqdefault.jpg" }}"  
+                        class="card-img-top" alt="Card image cap" width="100%"> 
+
+                    <div class="card-body">
+                      <h4 class="card-title kr-dh">{{ videos[i]['title'] }}</h4>
+                      <div class="card-category">
+                        <span class="text-rose h5 russo"><i class="material-icons">visibility</i> 
+                          {{ videos[i]['view_count'] }} views</span> 
+                        <a href="{{ url_for('detail', video_id=videos[i]['video_id']) }}" 
+                          class="btn btn-info btn-sm btn-round float-right russo">predict</a>  
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons">date_range</i> {{ videos[i]['published'] }}
+                      </div>
+                      <a href="{{ videos[i]['url'] }}" 
+                      class="btn btn-danger btn-sm btn-round float-right">
+                        <i class="material-icons">play_arrow</i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>

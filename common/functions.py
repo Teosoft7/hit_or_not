@@ -34,13 +34,8 @@ def get_videos(db, count=3):
         view_cursor = view_coll.find(filter).sort('timestamp', 
                                                   DESCENDING).limit(1)
         views = view_cursor.next()
-
-        if views['view_count'] > 1_000_000_000:
-            views['view_count'] = f'{views["view_count"] / 1_000_000_000:.1f}B'
-        elif views['view_count'] > 1_000_000:
-            views['view_count'] = f'{views["view_count"] / 1_000_000:.1f}M'
-        elif views['view_count'] > 1_000:
-            views['view_count'] = f'{views["view_count"] / 1_000:.1f}K'
+        # apply string format
+        views['view_count'] = get_count_string(views['view_count'])
 
         record = video
         record.update(views)
@@ -86,7 +81,7 @@ def get_count_string(value):
     elif value > 1_000:
         return "{:,.1f} K".format(value / 1_000)
     
-    return "{:,.1f}".format(value)
+    return "{:,d}".format(value)
 
 def get_view_data(db, video_id):
     """Return view_count collection for video_id"""
@@ -152,6 +147,27 @@ def get_most_watched_video(db, count=10):
 
     # return video list
     return video_views[:count]
+
+def get_most_recent_video(db, count=10):
+    """Return top 10 most view increased video for last n(=4) hours"""
+    # get video detail and set view_count & increment
+    video_coll = db['video_detail']
+    cur = video_coll.find({}).sort('published_date', -1).limit(count)
+    
+    # get view_counts
+    view_coll = db['view_count']
+    videos = [video for video in cur]
+    for video in videos:
+        filter = {'video_id': video['video_id']}
+        view_cursor = view_coll.find(filter).sort('timestamp', 
+                                                  DESCENDING).limit(1)
+        views = view_cursor.next()
+        video.update(views)
+        # apply string format
+        video['view_count'] = get_count_string(video['view_count'])
+
+    # return video list
+    return videos
 
 def do_predict(data, periods=3):
     """Return predicted view_count for period(default:3) days """
