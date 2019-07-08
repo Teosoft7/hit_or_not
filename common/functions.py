@@ -44,13 +44,38 @@ def get_videos(db, count=3):
     # print(result)
     return result
 
+def get_video_detail(db, video_id):
+    """Return video detail & current view, comment, like count
+       for video_id"""
+
+    # get video detail first
+    coll = db['video_detail']
+    cur = coll.find({'video_id': video_id})
+    video = cur.next()
+    
+    coll = db['view_count']
+    cur = coll.aggregate([
+        {'$match': {'video_id': video_id}},
+        {'$group' : {'_id':'$video_id', 
+                    'view_count':{'$max':'$view_count'}, 
+                    'like_count':{'$max':'$like_count'},
+                    'comment_count':{'$max':'$comment_count'},
+                    }
+        }
+    ])
+    # update video with views
+    video.update(cur.next())
+    
+    return video
+
 def get_collection_count(db, collection_name):
     """Return total documents count of collection"""
     coll = db[collection_name]
     return coll.count_documents({})
 
 def get_sum_view_count(db, period=4):
-    """Return sum of max(view_counts) and sum of view counts for last period(default=4) hours"""
+    """Return sum of max(view_counts) and sum of view counts for 
+    last period(default=4) hours"""
     ago = datetime.now() - timedelta(hours=period)
     coll = db['view_count']
     min_cur = coll.aggregate([
@@ -101,7 +126,9 @@ def get_hot_video(db, count=10, hours=4):
         {'$group': {'_id':'$video_id', 
                     'prev_count': {'$min':'$view_count'} ,
                     'view_count': {'$max':'$view_count'}} },
-        {'$addFields': {'increment': {'$subtract': ['$view_count', '$prev_count']}}},
+        {'$addFields': {'increment': 
+                        {'$subtract': 
+                        ['$view_count', '$prev_count']}}},
         { "$sort": { "increment": -1 } }
     ])
 
@@ -238,8 +265,6 @@ def create_chart(data, title, hover_tool=None,
 
     return p
 
-
-
 def get_all_collection(coll, filters=None):
     """Returns the list of objects in mongodb collection"""
     cursor = coll.find({})
@@ -274,7 +299,10 @@ def get_view_counts(db, video_id):
     view_counts = [record for record in cur]
     return pd.DataFrame(view_counts)
 
-def draw_count_chart(data, fields=['view_count'], title='Count by Time', figsize=(12, 6)):
+def draw_count_chart(data, 
+                     fields=['view_count'], 
+                     title='Count by Time', 
+                     figsize=(12, 6)):
     """Draw a chart with data(timestamp, counts)"""
     fig, ax = plt.subplots(figsize=figsize)
     fig.suptitle(title)

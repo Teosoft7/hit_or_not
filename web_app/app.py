@@ -12,7 +12,8 @@ from functions import (get_videos,
                        get_collection_count,
                        get_hot_video,
                        get_most_watched_video,
-                       get_most_recent_video)
+                       get_most_recent_video,
+                       get_video_detail,)
 
 # import common libraries
 import pandas as pd
@@ -91,14 +92,25 @@ def about():
 
 @app.route('/detail', methods=['GET'])
 def detail():
-    """Return video detail page."""    
+    """Return video detail page.""" 
+
+    # get video id   
     video_id = request.args.get('video_id')
+
+    # get detail info about video
+    video = get_video_detail(db, video_id)
+    video['view_count'] = get_count_string(video['view_count'])
+    video['like_count'] = get_count_string(video['like_count'])
+    video['comment_count'] = get_count_string(video['comment_count'])
+
+    # perform predict with fbProPhet
     data = get_view_data(db, video_id)
-    hover=None
     future = do_predict(pd.DataFrame(data))
-    plot = create_chart(future, "View Counts", hover)
+    
+    # Draw a chart with Bokeh
+    plot = create_chart(future, "View Counts", None)
     script, div = components(plot)
 
     return render_template('detail.html', count=len(data), 
-                            data=data, video=None, 
+                            data=data, video=video, 
                             the_script=script, the_div=div)
