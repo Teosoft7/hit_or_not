@@ -112,10 +112,10 @@ def detail():
     view_by_day = pd.DataFrame(get_daily_view_count(db, video_id))
 
     # Draw a chart with Bokeh
-    plot = create_bar_chart(view_by_day, 
-                            "View Counts", 
-                            video_id, 
-                            predicts=3)
+    plot = create_chart(future, 
+                        "View Counts", 
+                        video_id)
+                        
     script, div = components(plot)
 
     return render_template('detail.html', count=len(data), 
