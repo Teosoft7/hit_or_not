@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>About</title>
+        <title>Hit or Not - About</title>
+        <link href="/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
         <link rel="stylesheet" href="css/styles.css">
-        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|Open+Sans|Russo+One&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
+
     </head>
     <body class="text-center">
         <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">            
             <main role="main" class="inner cover">
-                <h1 class="cover-heading">Hit or Not</h1>
-                <p class="lead">Prediction for K-Pop music videos on YouTube.</p>
-                <p class="lead">
-                <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-                </p>
+                <h1 class="cover-heading russo">about - Hit or Not</h1>
+                <p>http://music.proba.in</p>
+                <p class="lead">Keeping track of K-Pop music video on YouTube.</p>
+                <br>
+                <div class="col-lg-4 mx-auto">
+                    <img class="rounded-circle" src="/assets/img/Taeho.jpg" alt="Taeho" width="140" height="140">
+                    <br>
+                    <h2 class="russo">Taeho Jeon</h2>
+                    <h4 class="kr-dh">(전태호)</h4>
+                    <p> You can find this project on 
+                        <a href="https://github.com/Teosoft7/hit_or_not.git">
+                        Github</a>.
+                    </p>
+                    <p> and you can reach me on 
+                        <a href="https://www.linkedin.com/in/taeho-jeon-78418870/">LinkedIn</a>
+                    </p>
+                    <p><a class="btn btn-primary" href="{{url_for('index')}}" role="button">Back to dashboad</a></p>
+                </div><!-- /.col-lg-4 -->
             </main>
-            
+
             <footer class="mastfoot mt-auto">
             <div class="inner">
-                <p>music.proba.in</p>
             </div>
             </footer>
         </div>
