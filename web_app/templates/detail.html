@@ -38,7 +38,7 @@
           <div class="row">
             <div class="col-md-12 border-bottom">
               <h2 class="h3 russo">
-                <a href="javascript:history.back()"><i class='material-icons'>arrow_back</i></a>              
+                <a href="javascript:history.back()"><i class='material-icons'>arrow_back</i>      </a>              
                 {{ video['title'] }}</h2>
             </div>
           </div>
@@ -68,11 +68,11 @@
                     <i class="material-icons">visibility</i>
                   </div>
                   <p class="card-category">Watched</p>
-                  <h3 class="card-title">{{ video['view_count'] }}</h3>
+                  <h4 class="card-title">{{ video['view_count'] }}</h4>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">date_range</i> Since 2019-07-01
+                    <i class="material-icons">date_range</i> Since {{video['published']}}
                   </div>
                 </div>
               </div>
@@ -81,14 +81,14 @@
               <div class="card card-stats">
                 <div class="card-header card-header-warning card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">comment</i>
+                    <i class="material-icons">library_add</i>
                   </div>
-                  <p class="card-category">Comments</p>
-                  <h3 class="card-title">{{ video['comment_count'] }}</h3>
+                  <p class="card-category">Increment</p>
+                  <h4 class="card-title">{{ video['increment'] }}</h4>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                      <i class="material-icons">date_range</i> Since 2019-07-01
+                      <i class="material-icons">access_time</i> Last 4 hours
                   </div>
                 </div>
               </div>
@@ -97,14 +97,14 @@
               <div class="card card-stats">
                 <div class="card-header card-header-info card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">thumb_up</i>
+                    <i class="material-icons">trending_up</i>
                   </div>
-                  <p class="card-category">Likes</p>
-                  <h3 class="card-title">{{ video['like_count'] }}</h3>
+                  <p class="card-category">Prediction</p>
+                  <h4 class="card-title">{{ video['prediction'] }}</h4>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <i class="material-icons">date_range</i> Since 2019-07-01
+                    <i class="material-icons">date_range</i> After 3 days
                   </div>
                 </div>
               </div>

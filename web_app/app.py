@@ -15,7 +15,8 @@ from functions import (get_videos,
                        get_most_recent_video,
                        get_video_detail,
                        get_daily_view_count,
-                       create_bar_chart,)
+                       create_bar_chart,
+                       get_increment_view,)
 
 # import common libraries
 import pandas as pd
@@ -105,11 +106,15 @@ def detail():
     video['like_count'] = get_count_string(video['like_count'])
     video['comment_count'] = get_count_string(video['comment_count'])
 
+    # get increments and update to video
+    increment = get_increment_view(db, video_id)
+    video['increment'] = get_count_string(increment['increment'])
+    
     # perform predict with fbProPhet
     data = get_view_data(db, video_id)
     future = do_predict(pd.DataFrame(data))
-    
     view_by_day = pd.DataFrame(get_daily_view_count(db, video_id))
+    video['prediction'] = get_count_string(future['yhat'].tail(1).values[0])
 
     # Draw a chart with Bokeh
     plot = create_chart(future, 

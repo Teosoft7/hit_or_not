@@ -104,13 +104,13 @@ def get_sum_view_count(db, period=4):
 def get_count_string(value):
     """Return string value with Billion/Million/Kilo"""
     if value > 1_000_000_000:
-        return "{:,.1f} B".format(value / 1_000_000_000)
+        return "{:,.2f} B".format(value / 1_000_000_000)
     elif value > 1_000_000:
-        return "{:,.1f} M".format(value / 1_000_000)
+        return "{:,.2f} M".format(value / 1_000_000)
     elif value > 1_000:
-        return "{:,.1f} K".format(value / 1_000)
+        return "{:,.2f} K".format(value / 1_000)
     
-    return "{:,d}".format(value)
+    return "{:,.0f}".format(value)
 
 def get_view_data(db, video_id):
     """Return view_count collection for video_id"""
@@ -119,6 +119,25 @@ def get_view_data(db, video_id):
     cursor = view_count_coll.find(filter).sort('timestamp', DESCENDING)
 
     return [record for record in cursor]
+
+def get_increment_view(db, video_id, hours=4):
+    """Return increment of view count in last n(4) hours"""
+    ago = datetime.now() - timedelta(hours=hours)
+    view_count_coll = db['view_count']
+    cur = view_count_coll.aggregate([
+        {'$match': {'timestamp': {"$gt": ago},
+                    'video_id': video_id}
+        },
+        {'$group': {'_id':'$video_id', 
+                    'prev_count': {'$min':'$view_count'} ,
+                    'view_count': {'$max':'$view_count'}} },
+        {'$addFields': {'increment': 
+                        {'$subtract': 
+                        ['$view_count', '$prev_count']}}},
+        { "$sort": { "increment": -1 } }
+    ])
+    result = [row for row in cur]
+    return result[0]
 
 def get_hot_video(db, count=10, hours=4):
     """Return top 10 most view increased video for last n(=4) hours"""
@@ -312,9 +331,6 @@ def create_chart(data, title, video_id,
                x_axis_type="datetime",
                sizing_mode='scale_width')
 
-    # p.vbar(x=fruits, top=counts, width=0.9)
-    # p.vbar(x=times, top=counts, width=.8)
-
     p.line(times, counts, 
            line_width=2, color='navy', legend='view counts')
 
@@ -337,13 +353,18 @@ def create_chart(data, title, video_id,
     # html += 'opacity: 0.3"></div>'
     # d1 = Div(text = html)
 
+
     p.title.text = title
     p.legend.location = "top_left"
     p.grid.grid_line_alpha = 0
     p.xaxis.axis_label = 'Date'
     p.yaxis.axis_label = 'Views' + label
-    p.background_fill_color = "beige"
-    p.background_fill_alpha = 0.5
+    # p.background_fill_color = "beige"
+    # p.background_fill_alpha = 0.5
+
+    p.ygrid.band_fill_color = "olive"
+    p.ygrid.band_fill_alpha = 0.1
+
     p.yaxis[0].formatter = NumeralTickFormatter(format="0.000")
 
     return p
