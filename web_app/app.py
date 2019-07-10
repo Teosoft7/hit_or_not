@@ -113,7 +113,6 @@ def detail():
     # perform predict with fbProPhet
     data = get_view_data(db, video_id)
     future = do_predict(pd.DataFrame(data))
-    view_by_day = pd.DataFrame(get_daily_view_count(db, video_id))
     video['prediction'] = get_count_string(future['yhat'].tail(1).values[0])
 
     # Draw a chart with Bokeh
@@ -123,6 +122,7 @@ def detail():
                         
     script, div = components(plot)
 
-    return render_template('detail.html', count=len(data), 
-                            data=view_by_day, video=video, 
-                            the_script=script, the_div=div)
+    return render_template('detail.html', 
+                            video=video, 
+                            the_script=script, 
+                            the_div=div)
