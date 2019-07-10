@@ -1,19 +1,46 @@
 # Hit_or_Not?
 
-Subject: Estimating the number of views for YouTube video (especially Official Music Video)
+Subject: Estimating the number of views for YouTube video
 
-## YouTube View Predictor
+## Getting Started
 
 YouTube is one of the most important platforms for the music industry. They publish their new songs for promoting. If it is going to be popular, the number of views, likes, comments are increasing also. Based on these kinds of data, is it possible to know it is going to be popular or not earlier with data science methods?
 
-With the number of views, number of comments, number of likes and the sentiment of comments for some duration, it could be built a prediction model for the number of views. 
+### Prerequesties
 
-Set the web scraper to cloud server, run it regularly (maybe every a couple of mins), collect new videos with #musicvideo hashtag & under 5mins length. Collect # of views, comments, likes and the sentiment score for comments for the certain video and store it to the mongodb database.
+Software to use
 
-By using some regression model (linear, decision tree, random forest, ...) to predict the # of views. Also, consider Prophet model because the data has a timestamp. For sentiment analysis, it is going to select a pre-trained NLP model.
+Python3
+Jupyter Notebook
+Prophet - Timeseries prediction model by Facebook
+Flask - Web App Framework
+Bokeh - Visualization library
+Selenium - Web scraping
+Pandas, Numpy, ... - Python library for data science
 
-Basically, train/test split with collected data and try to find a real-world example, 'select a music video and tracing its rank of Billboard or something like that'.  
+Server
+OS - Linux Ubuntu 18.04
+Web Server - NGINX
+Database - MongoDB
 
-The model will be deployed as a Web app that can be used to select a video from the list to see the prediction results
+Front End
+Bootstrap4
+Material Dashboard by Creative Tim (link)
 
-#### cf) This app is currently under construction!!!
+### Installing
+
+with pip
+with apt
+
+### Running
+
+Web App - flask run
+Scraping - python3 scrap.py
+
+### EDA
+
+You can refef Jupyter notebooks
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
