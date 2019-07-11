@@ -4,43 +4,73 @@ Subject: Estimating the number of views for YouTube video
 
 ## Getting Started
 
-YouTube is one of the most important platforms for the music industry. They publish their new songs for promoting. If it is going to be popular, the number of views, likes, comments are increasing also. Based on these kinds of data, is it possible to know it is going to be popular or not earlier with data science methods?
+YouTube is one of the most popular platforms for the music industry. They publish their new songs for promoting. The number of view count is a solid indicator to determine hit or not. Hit or Not is trying to predict the view count in near future for the music videos on *YouTube*.
 
 ### Prerequesties
-
-Software to use
-
-Python3
-Jupyter Notebook
-Prophet - Timeseries prediction model by Facebook
-Flask - Web App Framework
-Bokeh - Visualization library
-Selenium - Web scraping
-Pandas, Numpy, ... - Python library for data science
 
 Server
 OS - Linux Ubuntu 18.04
 Web Server - NGINX
 Database - MongoDB
+(VM on cloud service is perferred)
 
-Front End
-Bootstrap4
-Material Dashboard by Creative Tim (link)
+Python3  
+Jupyter Notebook  
+Prophet - Timeseries prediction model by Facebook  
+Flask - Web App Framework  
+Bokeh - Visualization library  
+Selenium - Web scraping  
+Pandas, Numpy, ... - Python library for data science  
+Bootstrap4 - CSS Library  
+Material Dashboard by Creative Tim ([Link](https://github.com/creativetimofficial/material-dashboard))
 
-### Installing
+### Install & Setup
 
-with pip
-with apt
+**for Server**
+* install NGINX
+```
+sudo apt install nginx
+```
+* install MONGODB
+```
+sudo apt install mongodb
+```
+* for scraping (setup virtual display & firefox)
+```
+## Firefox
+sudo apt update
+sudo apt install firefox
+
+## Geckodriver
+wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.24.0-linux64.tar.gz -O > /usr/bin/geckodriver'
+sudo chmod +x /usr/bin/geckodriver
+rm geckodriver-v0.24.0-linux64.tar.gz
+
+## Virtual display
+sudo apt install xvfb
+sudo apt-get install xserver-xephyr
+```
+
+With attached requirements.txt file,
+you can install prerequesties python libraires with
+```pip install -r requirements.txt```
+
 
 ### Running
 
-Web App - flask run
-Scraping - python3 scrap.py
+Web App - ```$ flask run```
+Scraping 
+```
+$ cd web_scrap/
+$ python3 scrap_video_detail.py
+$ python3 scrap_view_count.py
+```
 
-### EDA
+### Initial Data
 
-You can refef Jupyter notebooks
+Before the run the scraping, it is needed to be set the target videos url to *video_list.txt*
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the GPL3.0 License - see the [LICENSE.md](LICENSE.md) file for details
