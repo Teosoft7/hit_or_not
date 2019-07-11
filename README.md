@@ -1,4 +1,6 @@
-# Hit_or_Not?
+# Hit or Not?
+
+[http://music.proba.in](http://music.proba.in)
 
 Subject: Estimating the number of views for YouTube video
 
@@ -8,10 +10,10 @@ YouTube is one of the most popular platforms for the music industry. They publis
 
 ### Prerequesties
 
-Server
-OS - Linux Ubuntu 18.04
-Web Server - NGINX
-Database - MongoDB
+Server  
+OS - Linux Ubuntu 18.04  
+Web Server - NGINX  
+Database - MongoDB    
 (VM on cloud service is perferred)
 
 Python3  
