@@ -11,6 +11,9 @@ YouTube is one of the most popular platforms for the music industry. They publis
 
 YouTube is providing APIs with a lot of limitations, to keep track of changing of view count for video, it is needed to scrap the data by ourselves. With selenium and Firefox, we can collect general information for video and view counts.
 
+![YouTube Screen](common/images/youtube.png?raw=true "YouTube Screen")
+
+
 ## Modeling
 
 The change of view/like/comments has correlation and could be used for the data model. But view increments is definitely based on the time. It is better to use facebook's ProPhet model for estimation. Final goal is to build a classification model for the hit or not with collecting much more data.
