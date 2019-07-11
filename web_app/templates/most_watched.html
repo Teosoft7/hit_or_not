@@ -118,7 +118,9 @@
                           </th>
                           <th>
                           </th>
-                        </thead>
+                          <th>
+                          </th>
+                          </thead>
                         <tbody>
                           {% for i in range(0, count) %}
                             <tr>
@@ -139,6 +141,12 @@
                                   class="btn btn-success btn-round btn-sm russo">
                                   predict
                                 </a>
+                              </td>
+                              <td>
+                                  <a href="{{videos[i]['url']}}" target="blank"
+                                      class="btn btn-danger btn-round btn-sm">
+                                    <i class="material-icons">play_arrow</i>
+                                  </a>
                               </td>
                             </tr>
                           {% endfor %}

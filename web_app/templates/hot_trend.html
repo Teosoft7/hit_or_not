@@ -126,7 +126,9 @@
                                         </th>
                                         <th>
                                         </th>
-                                    </thead>
+                                        <th>
+                                        </th>
+                                      </thead>
                                     <tbody>
                                         {% for i in range(0, count) %}
                                         <tr>
@@ -134,7 +136,7 @@
                                             {{i + 1}}
                                             </td>
                                             <td>
-                                            {{videos[i]['title']}}
+                                              {{videos[i]['title']}}
                                             </td>
                                             <td>
                                             {{videos[i]['published']}}
@@ -149,6 +151,12 @@
                                                 <a href="{{url_for('detail', video_id=videos[i]['video_id'])}}" 
                                                     class="btn btn-primary btn-round btn-sm russo">
                                                     predict
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{videos[i]['url']}}" target="blank"
+                                                    class="btn btn-danger btn-round btn-sm">
+                                                  <i class="material-icons">play_arrow</i>
                                                 </a>
                                             </td>
                                         </tr>

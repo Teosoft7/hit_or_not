@@ -15,7 +15,6 @@ from functions import (get_videos,
                        get_most_recent_video,
                        get_video_detail,
                        get_daily_view_count,
-                       create_bar_chart,
                        get_increment_view,)
 
 # import common libraries

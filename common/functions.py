@@ -254,56 +254,13 @@ def get_daily_view_count(db, video_id, days=7):
                     '_id.day': -1}}
     ])
     view_by_day = [{'video_id': row['_id']['video_id'],
-                    'date': datetime(row['_id']['year'], row['_id']['month'], row['_id']['day']),
+                    'date': datetime(row['_id']['year'], 
+                            row['_id']['month'], 
+                            row['_id']['day']),
                     'view_count': row['view_count']}
                     for row in cur]
 
     return view_by_day[:days]
-
-def create_bar_chart(data, title, video_id, predicts,
-                    width=800, height=480):
-    """Create a line chart with data"""
-    counts = data['view_count']
-    times = data['date']
-    predict_times = times.tail(predicts)
-
-    label=''
-    divider = 1
-    if counts.min() > 1_000_000:
-        divider = 1_000_000
-        label = ' (M)'
-    elif counts.min() > 1_000:
-        divider = 1_000
-        label = ' (K)'
-
-    counts = data['view_count'] / divider
-    # predict_counts = data['view_count'].tail(predicts) / divider
-    # predict_upper = data['yhat_upper'].tail(3) / divider
-    # predict_lower = data['yhat_lower'].tail(3) / divider
-
-    p = figure(plot_width=width, 
-               plot_height=height,
-               x_axis_type="datetime",
-               sizing_mode='scale_width')
-
-    # p.vbar(x=fruits, top=counts, width=0.9)
-
-    # width : 1 = 1ms
-    # *1000 : 1 sec, *60 : 1 min,  *60 : 1 hour
-    width = 1 * 1000 * 60 * 60 * 12 
-    p.vbar(x=times, top=counts, width=width, color='navy',)
-    # p.xaxis.formatter = DatetimeTickFormatter(days = ['%m/%d', '%a%d']) 
-    # Or whatever format you want to use...
-    p.title.text = title
-    p.grid.grid_line_alpha = 0
-    p.xaxis.axis_label = 'Date'
-    p.yaxis.axis_label = 'Views' + label
-    p.background_fill_color = "beige"
-    p.background_fill_alpha = 0.5
-    p.yaxis[0].formatter = NumeralTickFormatter(format="0.000")
-
-    return p
-
 
 def create_chart(data, title, video_id,
                  width=800, height=480):
@@ -346,13 +303,13 @@ def create_chart(data, title, video_id,
            line_width=2, color='red', line_dash='dotted', 
            legend='lower bound')
 
+    # add background image to chart
     # url = f'http://img.youtube.com/vi/{video_id}/mqdefault.jpg'
     # html = '<div style="position: absolute; left:-1280px; top:0px">'
     # html += '<img src='  
     # html += url + f' style="width:100%; height:100%;'
     # html += 'opacity: 0.3"></div>'
     # d1 = Div(text = html)
-
 
     p.title.text = title
     p.legend.location = "top_left"
@@ -365,7 +322,7 @@ def create_chart(data, title, video_id,
     p.ygrid.band_fill_color = "olive"
     p.ygrid.band_fill_alpha = 0.1
 
-    p.yaxis[0].formatter = NumeralTickFormatter(format="0.000")
+    p.yaxis[0].formatter = NumeralTickFormatter(format="0.00")
 
     return p
 
