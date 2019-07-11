@@ -28,15 +28,17 @@ def get_view_count(browser, url):
     view_count = int(count) if len(count) > 0 else 0
     
     # number of likes
-    like_sel = 'ytd-toggle-button-renderer.style-text[is-icon-button] #text.ytd-toggle-button-renderer'
-    like_count_element = browser.find_element_by_css_selector(like_sel).get_attribute('aria-label')
-    if len(like_count_element) > 0:
-        like = ''.join([n for n in like_count_element if n.isdigit()])
+    like_sel = 'ytd-toggle-button-renderer.style-text[is-icon-button]'
+    like_sel += ' #text.ytd-toggle-button-renderer'
+    like_count_element = browser.find_element_by_css_selector(like_sel)
+    like_count_attribute = like_count_element.get_attribute('aria-label')
+    if len(like_count_attribute) > 0:
+        like = ''.join([n for n in like_count_attribute if n.isdigit()])
         like_count = int(like) if len(like) > 0 else 0
 
     # number of comments
-    class_name = 'count-text'
-    count_text_element = browser.find_element_by_class_name('count-text').text
+    cls_nm = 'count-text'
+    count_text_element = browser.find_element_by_class_name(cls_nm).text
     comment = ''.join([n for n in count_text_element if n.isdigit()])
     comment_count = int(comment) if len(comment) > 0 else 0
 
@@ -88,6 +90,5 @@ with Display(visible=1, size=(1920, 1080)) as display:
         # Idle 1+ mins
         print('Idling')
         time.sleep(60 + random.randint(0, 60))
-        
-
-browser.close()
+    
+    browser.close()
