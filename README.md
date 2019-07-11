@@ -3,9 +3,12 @@
 **Keeping track of music video on YouTube**
 [http://music.proba.in](http://music.proba.in)
 
+
 ## Getting Started
 
 YouTube is one of the most popular platforms for the music industry. They publish their new songs for promoting. The number of view count is a solid indicator to determine hit or not. Hit or Not is trying to predict the view count in the near future for the music videos on *YouTube*.
+
+
 
 ## Data Preparation
 
@@ -14,11 +17,16 @@ YouTube is providing APIs with a lot of limitations, to keep track of changing o
 ![YouTube Screen](common/images/youtube.png?raw=true "YouTube Screen")
 
 
+
 ## Modeling
 
-The change of view/like/comments has correlation and could be used for the data model. But view increments is definitely based on the time. It is better to use facebook's ProPhet model for estimation. Final goal is to build a classification model for the hit or not with collecting much more data.
+The change of view/like/comments has correlation and could be used for the data model. But view increments is definitely based on the time. It is better to use facebook's **[ProPhet](https://facebook.github.io/prophet/)** model for estimation. The final goal is to build a classification model for the hit or not with collecting much more data.
 
-## Make the app working
+![View vs Like](common/images/viewvslike.png?raw=true "View vs Like")
+
+
+
+## Let's make the app working
 
 ### Prerequisites for App
 
