@@ -1,14 +1,23 @@
 # Hit or Not?
 
+**Keeping track of music video on YouTube**
 [http://music.proba.in](http://music.proba.in)
-
-Subject: Estimating the number of views for YouTube video
 
 ## Getting Started
 
-YouTube is one of the most popular platforms for the music industry. They publish their new songs for promoting. The number of view count is a solid indicator to determine hit or not. Hit or Not is trying to predict the view count in near future for the music videos on *YouTube*.
+YouTube is one of the most popular platforms for the music industry. They publish their new songs for promoting. The number of view count is a solid indicator to determine hit or not. Hit or Not is trying to predict the view count in the near future for the music videos on *YouTube*.
 
-### Prerequesties
+## Data Preparation
+
+YouTube is providing APIs with a lot of limitations, to keep track of changing of view count for video, it is needed to scrap the data by ourselves. With selenium and Firefox, we can collect general information for video and view counts.
+
+## Modeling
+
+The change of view/like/comments has correlation and could be used for the data model. But view increments is definitely based on the time. It is better to use facebook's ProPhet model for estimation. Final goal is to build a classification model for the hit or not with collecting much more data.
+
+## Make the app working
+
+### Prerequisites for App
 
 Server  
 OS - Linux Ubuntu 18.04  
@@ -18,7 +27,7 @@ Database - MongoDB
 
 Python3  
 Jupyter Notebook  
-Prophet - Timeseries prediction model by Facebook  
+Prophet - Time series prediction model by Facebook  
 Flask - Web App Framework  
 Bokeh - Visualization library  
 Selenium - Web scraping  
@@ -33,11 +42,11 @@ Material Dashboard by Creative Tim ([Link](https://github.com/creativetimofficia
 ```
 sudo apt install nginx
 ```
-* install MONGODB
+* install MongoDB
 ```
 sudo apt install mongodb
 ```
-* for scraping (setup virtual display & firefox)
+* for scraping (setup virtual display & Firefox)
 ```
 ## Firefox
 sudo apt update
@@ -55,23 +64,33 @@ sudo apt-get install xserver-xephyr
 ```
 
 With attached requirements.txt file,
-you can install prerequesties python libraires with
+you can install prerequisites python libraries with
 ```pip install -r requirements.txt```
 
+### Initial Data
 
-### Running
+Before the run the scraping, it is needed to be set the target videos url to *video_list.txt*
 
-Web App - ```$ flask run```
-Scraping 
+### Running the scrapping
+
 ```
 $ cd web_scrap/
 $ python3 scrap_video_detail.py
 $ python3 scrap_view_count.py
 ```
+Scraping video_detail takes a while,  
+but scraping view_count needs to be run forever.  
+(If you want to keep track of change of view count)
 
-### Initial Data
+### Running the web app
 
-Before the run the scraping, it is needed to be set the target videos url to *video_list.txt*
+On the Linux Server  
+
+```
+$ cd web_app
+$ FLASK_APP=app.py flask run
+```
+
 
 ## License
 

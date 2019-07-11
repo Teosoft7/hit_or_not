@@ -84,7 +84,8 @@ with Display(visible=1, size=(1920, 1080)) as display:
                     'like_count': count['like_count'],
                     'timestamp': count['timestamp']
                 })
-            except:
+            except Exception as e:
+                # print(e.with_traceback)
                 print(f'error in {i}, {video["url"]}')
 
         # Idle 1+ mins
