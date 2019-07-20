@@ -30,11 +30,11 @@ The final goal is to build a classification model for the hit or not with collec
 
 ### Prerequisites for App
 
-Server . 
-OS - Linux Ubuntu 18.04 . 
-Web Server - NGINX . 
-Database - MongoDB . 
-(VM on cloud service is preferred) . 
+Server  
+OS - Linux Ubuntu 18.04  
+Web Server - NGINX  
+Database - MongoDB   
+(VM on cloud service is preferred)  
   
 Python3
 Jupyter Notebook
