@@ -19,7 +19,7 @@ from bokeh.models import (CustomJS,
 # Used for index.html page
 def get_videos(db, count=3):
     """Return the random selected video from the db"""
-    video_coll = db['video_detail']
+    video_coll = db['video']
     view_coll = db['view_count']
 
     cursor = video_coll.find({})
@@ -53,7 +53,7 @@ def get_video_detail(db, video_id):
        for video_id"""
 
     # get video detail first
-    coll = db['video_detail']
+    coll = db['video']
     cur = coll.find({'video_id': video_id})
     video = cur.next()
     
@@ -160,7 +160,7 @@ def get_hot_video(db, count=10, hours=4):
     
     # loop through count elements
     # get video detail and set view_count & increment
-    video_coll = db['video_detail']
+    video_coll = db['video']
     for row in video_views[:count]:
         video_id = row['_id']
         cur = video_coll.find({'video_id': video_id})
@@ -188,7 +188,7 @@ def get_most_watched_video(db, count=10):
     
     # loop through count elements
     # get video detail and set view_count & increment
-    video_coll = db['video_detail']
+    video_coll = db['video']
     for row in video_views[:count]:
         video_id = row['_id']
         cur = video_coll.find({'video_id': video_id})
@@ -201,7 +201,7 @@ def get_most_watched_video(db, count=10):
 def get_most_recent_video(db, count=10):
     """Return top 10 most view increased video for last n(=4) hours"""
     # get video detail and set view_count & increment
-    video_coll = db['video_detail']
+    video_coll = db['video']
     cur = video_coll.find({}).sort('published_date', -1).limit(count)
     
     # get view_counts
